@@ -29,10 +29,38 @@ const Index = () => {
   });
 
   const [newsItems, setNewsItems] = useState([
-    { id: 1, title: 'Технологические новости: ИИ достигает новых высот', time: '2 часа назад', category: 'Технологии' },
-    { id: 2, title: 'Экономика: Рост курса криптовалют продолжается', time: '4 часа назад', category: 'Финансы' },
-    { id: 3, title: 'Наука: Открытие новой экзопланеты в обитаемой зоне', time: '6 часов назад', category: 'Наука' },
-    { id: 4, title: 'Спорт: Чемпионат мира по футболу приближается', time: '8 часов назад', category: 'Спорт' }
+    { 
+      id: 1, 
+      title: 'Технологические новости: ИИ достигает новых высот', 
+      time: '2 часа назад', 
+      category: 'Технологии',
+      image: '/img/18d017a2-5a90-4f36-9093-95d254d72b18.jpg',
+      description: 'Последние достижения в области искусственного интеллекта открывают новые возможности'
+    },
+    { 
+      id: 2, 
+      title: 'Экономика: Рост курса криптовалют продолжается', 
+      time: '4 часа назад', 
+      category: 'Финансы',
+      image: '/img/14df897f-56d7-4e1d-9699-a80054c43f20.jpg',
+      description: 'Биткоин и другие криптовалюты показывают устойчивый рост на мировых рынках'
+    },
+    { 
+      id: 3, 
+      title: 'Наука: Открытие новой экзопланеты в обитаемой зоне', 
+      time: '6 часов назад', 
+      category: 'Наука',
+      image: '/img/18bceca0-2351-4a65-8982-a3f76c4798f0.jpg',
+      description: 'Астрономы обнаружили планету, которая может поддерживать жизнь'
+    },
+    { 
+      id: 4, 
+      title: 'Спорт: Чемпионат мира по футболу приближается', 
+      time: '8 часов назад', 
+      category: 'Спорт',
+      image: '/placeholder.svg',
+      description: 'Подготовка к главному футбольному турниру года идет полным ходом'
+    }
   ]);
   
   const [loading, setLoading] = useState(false);
@@ -40,14 +68,54 @@ const Index = () => {
 
   // Additional news for infinite scroll
   const moreNewsItems = [
-    { title: 'Искусство: Новая выставка современных художников', category: 'Культура' },
-    { title: 'Медицина: Прорыв в лечении редких заболеваний', category: 'Здоровье' },
-    { title: 'Автомобили: Представлен новый электромобиль', category: 'Авто' },
-    { title: 'Космос: Планируется новая миссия на Марс', category: 'Космос' },
-    { title: 'Образование: Реформа высшего образования', category: 'Образование' },
-    { title: 'Экология: Новые методы борьбы с загрязнением', category: 'Экология' },
-    { title: 'Кулинария: Тренды здорового питания 2025', category: 'Еда' },
-    { title: 'Путешествия: Открытие новых туристических маршрутов', category: 'Туризм' }
+    { 
+      title: 'Искусство: Новая выставка современных художников', 
+      category: 'Культура',
+      image: '/placeholder.svg',
+      description: 'Масштабная выставка представит работы ведущих современных художников'
+    },
+    { 
+      title: 'Медицина: Прорыв в лечении редких заболеваний', 
+      category: 'Здоровье',
+      image: '/placeholder.svg',
+      description: 'Новый метод терапии показывает многообещающие результаты'
+    },
+    { 
+      title: 'Автомобили: Представлен новый электромобиль', 
+      category: 'Авто',
+      image: '/placeholder.svg',
+      description: 'Революционная модель обещает изменить рынок электротранспорта'
+    },
+    { 
+      title: 'Космос: Планируется новая миссия на Марс', 
+      category: 'Космос',
+      image: '/img/18bceca0-2351-4a65-8982-a3f76c4798f0.jpg',
+      description: 'Амбициозный проект по освоению красной планеты'
+    },
+    { 
+      title: 'Образование: Реформа высшего образования', 
+      category: 'Образование',
+      image: '/placeholder.svg',
+      description: 'Кардинальные изменения в системе высшего образования'
+    },
+    { 
+      title: 'Экология: Новые методы борьбы с загрязнением', 
+      category: 'Экология',
+      image: '/placeholder.svg',
+      description: 'Инновационные технологии для защиты окружающей среды'
+    },
+    { 
+      title: 'Кулинария: Тренды здорового питания 2025', 
+      category: 'Еда',
+      image: '/placeholder.svg',
+      description: 'Новые подходы к здоровому образу жизни и питанию'
+    },
+    { 
+      title: 'Путешествия: Открытие новых туристических маршрутов', 
+      category: 'Туризм',
+      image: '/placeholder.svg',
+      description: 'Уникальные направления для незабываемых путешествий'
+    }
   ];
 
   useEffect(() => {
@@ -109,7 +177,9 @@ const Index = () => {
         id: startIndex + index + 1,
         title: item.title,
         time: `${Math.floor(Math.random() * 12) + 1} часов назад`,
-        category: item.category
+        category: item.category,
+        image: item.image,
+        description: item.description
       }));
       
       setNewsItems(prev => [...prev, ...newItems]);
@@ -346,19 +416,29 @@ const Index = () => {
         {/* News Feed */}
         <div>
           <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Лента новостей</h2>
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 gap-6">
             {newsItems.map((news) => (
-              <Card key={news.id} className="p-4 bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
-                <CardContent className="p-0">
-                  <div className="flex items-start justify-between mb-2">
+              <Card key={news.id} className="overflow-hidden bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group">
+                <div className="aspect-video overflow-hidden">
+                  <img 
+                    src={news.image} 
+                    alt={news.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <CardContent className="p-4">
+                  <div className="flex items-start justify-between mb-3">
                     <span className="text-xs font-medium text-blue-600 bg-blue-100 px-2 py-1 rounded-full">
                       {news.category}
                     </span>
                     <span className="text-xs text-gray-500">{news.time}</span>
                   </div>
-                  <h3 className="font-semibold text-gray-800 mb-2 leading-tight">
+                  <h3 className="font-semibold text-gray-800 mb-2 leading-tight line-clamp-2">
                     {news.title}
                   </h3>
+                  <p className="text-sm text-gray-600 line-clamp-2">
+                    {news.description}
+                  </p>
                 </CardContent>
               </Card>
             ))}
